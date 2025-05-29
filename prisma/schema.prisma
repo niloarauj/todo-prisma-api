@@ -7,23 +7,25 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model tarefas {
+model tarefa {
   id           Int       @id @default(autoincrement())
   id_usuario   Int
   descricao    String    @db.VarChar(250)
   data_criacao DateTime? @default(now()) @db.Timestamptz(6)
   data_termino DateTime? @db.Date
   status       String?   @default("PENDENTE") @db.VarChar(40)
-  prioridade   String?   @db.VarChar(40)
-  usuarios     usuarios  @relation(fields: [id_usuario], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  titulo       String?   @db.VarChar(40)
+  prioridade   String?   @default("MEDIA") @db.VarChar(40)
+  usuarios     usuario  @relation(fields: [id_usuario], references: [id], onDelete: Cascade, onUpdate: NoAction)
 }
 
-model usuarios {
+model usuario {
   id              Int       @id @default(autoincrement())
   nome            String    @db.VarChar(40)
   email           String    @unique @db.VarChar(40)
   data_nascimento DateTime  @db.Date
   ativo           Boolean?  @default(true)
   data_criacao    DateTime? @default(now()) @db.Timestamptz(6)
-  tarefas         tarefas[]
+  tarefas         tarefa[]
+  senha           String    @db.VarChar(255)
 }
