@@ -16,6 +16,15 @@ export const loginSchema = z.object({
     password: z.string().min(1, "The password must to have 8 or more characteres long")
 })
 
-// Tipos TypeScript inferidos
+// Task creation validation
+export const taskSchema = z.object({
+    titulo: z.string().min(3, "Title too short"),
+    descricao: z.string().optional(),
+    id: z.number().int()
+})
+
+
+
+
 export type RegisterInput = z.infer<typeof registerSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;

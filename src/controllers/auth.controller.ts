@@ -7,7 +7,6 @@ import { ZodError, z } from 'zod';
 
 const prisma = new PrismaClient();
 
-// Function to transform 
 
 // User register
 export const register = async ( req: Request, res: Response ):  Promise<void> => {
